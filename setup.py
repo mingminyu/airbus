@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = "0.0.2"
+VERSION = "0.0.3"
 
 setup(
     name='airbus',
@@ -8,5 +8,8 @@ setup(
     description='airbus package',
     platforms=["all"],
     packages=find_packages(),
-    zip_safe=False
+    zip_safe=False,
+    install_requires=[
+        "rich==11.2.0"
+        ],
     )
