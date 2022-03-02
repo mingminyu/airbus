@@ -10,6 +10,8 @@ setup(
     packages=find_packages(),
     zip_safe=False,
     install_requires=[
-        "rich==11.2.0"
+        "rich==11.2.0",
+        "impyla==0.17.0",
+        "pandas==1.4.1"
         ],
     )

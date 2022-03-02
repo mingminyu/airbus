@@ -26,7 +26,7 @@ def progressbar(func):
                 SpinnerColumn(finished_text="🚀"),
                 BarColumn(),
                 "[progress.percentage]{task.percentage:>3.2f}%",
-                "🕐",
+                SpinnerColumn(spinner_name="clock", finished_text="🕐"),
                 TimeElapsedColumn(),
                 "⏳",
                 TimeRemainingColumn()) as progress:
