@@ -1,6 +1,6 @@
+import logging
 from functools import wraps
 from inspect import isgenerator
-from typing import Text
 from rich.panel import Panel
 from rich.progress import Progress, BarColumn, SpinnerColumn, TimeRemainingColumn, TimeElapsedColumn
 
@@ -12,6 +12,8 @@ class RichProgress(Progress):
 
 def progressbar(func):
     """Add a progress bar decorator for generator function to display in the terminal"""
+    log = logging.getLogger("ProgressBar")
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         func_generator = func(*args, **kwargs)
