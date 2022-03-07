@@ -13,6 +13,7 @@ setup(
         "rich==11.2.0",
         "rich[jupyter]",
         "click==8.0.4",
+        "requests==2.25.1",
         "impyla==0.17.0",
         "pandas==1.4.1"
         ],
