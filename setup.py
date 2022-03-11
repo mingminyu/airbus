@@ -7,6 +7,9 @@ setup(
     version=VERSION,
     description='airbus package',
     platforms=["all"],
+    license='GPL',
+    author="yumingmin",
+    author_email="yu_mingm623@163.com",
     packages=find_packages(),
     zip_safe=False,
     install_requires=[
@@ -16,5 +19,6 @@ setup(
         "requests==2.25.1",
         "impyla==0.17.0",
         "pandas==1.4.1"
+        # "lazy-object-proxy=1.7.1",
         ],
     )
