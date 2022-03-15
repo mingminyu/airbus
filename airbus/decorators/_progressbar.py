@@ -1,6 +1,6 @@
 import logging
 from functools import wraps
-from inspect import isgenerator
+from inspect import isgenerator, isasyncgen
 from rich.panel import Panel
 from rich.progress import Progress, BarColumn, SpinnerColumn, TimeRemainingColumn, TimeElapsedColumn
 
