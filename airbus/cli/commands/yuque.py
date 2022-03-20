@@ -53,7 +53,11 @@ class ObtainYuQueDocs(object):
         """Get all public repos of special account"""
         repo_api = f"https://www.yuque.com/api/v2/users/{self.uid}/repos"
         res = requests.get(repo_api, headers=self.headers).json()
-        repos = [repo['slug'] for repo in res['data'] if repo['public'] == 1]
+
+        if 'data' in res:
+            repos = [repo['slug'] for repo in res['data'] if repo['public'] == 1]
+        else:
+            repos = []
 
         return repos
 
@@ -65,9 +69,11 @@ class ObtainYuQueDocs(object):
             docs_api = f"https://www.yuque.com/api/v2/repos/{self.uid}/{repo}/docs"
             doc_url = "https://www.yuque.com/{uid}/{repo}/{doc_url}"
             res = requests.get(docs_api, headers=self.headers).json()
-            docs_repo = [doc_url.format(uid=self.uid, repo=repo, doc_url=doc['slug'])
-                         for doc in res['data'] if doc['public'] == 1]
-            docs += docs_repo
+
+            if 'data' in res:
+                docs_repo = [doc_url.format(uid=self.uid, repo=repo, doc_url=doc['slug'])
+                            for doc in res['data'] if doc['public'] == 1]
+                docs += docs_repo
 
         return docs
 
@@ -868,7 +874,6 @@ def search_docs(args):
     checkpoint_search_result = load_data("checkpoint_search")
     checkpoint_search = users.index(checkpoint_search_result[0]) if checkpoint_search_result else 0
     users_search = users[checkpoint_search:][:num]
-    # docs = []
 
     with RichProgress(
             "[progress.description]{task.description}({task.completed}/{task.total})",
