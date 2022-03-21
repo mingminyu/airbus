@@ -1,6 +1,8 @@
 import math
 import re
 import os
+import time
+
 import requests
 import logging
 import configparser
@@ -199,9 +201,11 @@ async def _like(user: Text, password: Text, docs: List[Text], num: int = 95):
                 skipped_docs.append(doc)
                 failed_docs.append(doc)
 
-        print(f"{len(docs) - len(failed_docs)} documents have been thumbed up👍")
-        print(f"{len(failed_docs)} have not been thumbed up unsuccessfully: ")
-        print("\'" + "',\n'".join(failed_docs) + "\'")
+        print(f"{len(like_docs) - len(failed_docs)} documents have been thumbed up👍")
+
+        if len(failed_docs) > 0:
+            print(f"{len(failed_docs)} have not been thumbed up unsuccessfully: ")
+            print("\n".join(failed_docs))
 
 
 def like(args):
@@ -522,8 +526,10 @@ async def _comment(user: Text, password: Text, num: int = 50):
 
             try:
                 await page.type("#lark-mini-editor > div > div.ne-editor-body > div.ne-editor-wrap > div.ne-editor-wrap-content > div > div > div.ne-editor-box > div > div", "写的不错，值得学习😁！")
+                time.sleep(1)
                 await asyncio.sleep(1)
                 await page.click("#commentFloorContainer > div.index-module_commentEditor_yI7Ow > div > div > div > div.comments-form-wrapper > div.action.clearfix > button")
+                time.sleep(1)
                 await asyncio.sleep(1)
 
                 progress.update(task, completed=p + 1, description=description)
