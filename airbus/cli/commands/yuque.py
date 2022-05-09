@@ -127,9 +127,10 @@ def display_table_yuque_accounts(users_info: List[List[Text]]):
     table.add_column("Index", justify="right", style="cyan", no_wrap=True)
     table.add_column("Account", style="magenta")
     table.add_column("Comment", justify="right", style="green")
+    table.add_column("CheckedDocs", justify="right", style="red")
 
     for i, user_info in enumerate(users_info):
-        table.add_row(str(i + 1), user_info[0], user_info[2])
+        table.add_row(str(i + 1), user_info[0], user_info[2], str(len(load_checked_docs(user_info[0]))))
 
     console = Console()
     console.print(table)
@@ -526,11 +527,11 @@ async def _comment(user: Text, password: Text, num: int = 50):
 
             try:
                 await page.type("#lark-mini-editor > div > div.ne-editor-body > div.ne-editor-wrap > div.ne-editor-wrap-content > div > div > div.ne-editor-box > div > div", "写的不错，值得学习😁！")
-                time.sleep(1)
-                await asyncio.sleep(1)
-                await page.click("#commentFloorContainer > div.index-module_commentEditor_yI7Ow > div > div > div > div.comments-form-wrapper > div.action.clearfix > button")
-                time.sleep(1)
-                await asyncio.sleep(1)
+                time.sleep(2)
+                await asyncio.sleep(2)
+                # await page.click("#commentFloorContainer > div.index-module_commentEditor_yI7Ow > div > div > div > div.comments-form-wrapper > div.action.clearfix > button")
+                await page.click("#main > div > div > div:nth-child(1) > div.DocReader-module_comment_eDglS > div > div > div.ReaderComment-module_commentFloorContainer_hYRys > div > div.index-module_commentEditor_yI7Ow > div > div > div > div.comments-form-wrapper > div.action.clearfix > button")
+                await asyncio.sleep(2)
 
                 progress.update(task, completed=p + 1, description=description)
 
